@@ -1,0 +1,53 @@
+{
+  "name": "minaws",
+  "version": "1.0.0",
+  "description": "aws react boilerplate",
+  "scripts": {
+    "build": "webpack",
+    "clean": "rimraf .cache dist",
+    "tsc": "tsc",
+    "start": "webpack-dev-server",
+    "test": "standard && jest"
+  },
+  "keywords": [
+    "aws",
+    "react",
+    "cognito",
+    "material"
+  ],
+  "author": "Giacomo Rebonato",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/history": "^4.6.2",
+    "@types/material-ui": "^0.20.8",
+    "@types/react": "^16.4.1",
+    "@types/react-dom": "^16.0.6",
+    "@types/react-router-dom": "^4.2.7",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "html-webpack-plugin": "^3.2.0",
+    "parcel-bundler": "^1.9.2",
+    "standard": "^11.0.1",
+    "typescript": "^2.9.2",
+    "webpack": "^4.12.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "dependencies": {
+    "@material-ui/core": "^1.2.3",
+    "amazon-cognito-identity-js": "^2.0.11",
+    "history": "^4.7.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.3.0",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "styled-components": "^3.3.3"
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  }
+}
