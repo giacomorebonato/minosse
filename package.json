@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "aws react boilerplate",
   "scripts": {
-    "build": "webpack",
+    "build": "parcel build ./src/index.html --public-url /minosse",
     "clean": "rimraf .cache dist",
+    "deploy": "aws s3 sync dist s3://minosse",
     "tsc": "tsc",
-    "start": "webpack-dev-server",
+    "start": "parcel ./src/index.html -p 3000",
     "test": "standard && jest"
   },
   "keywords": [
@@ -24,18 +25,14 @@
     "@types/react-dom": "^16.0.6",
     "@types/react-router-dom": "^4.2.7",
     "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.4",
+    "babel-eslint": "^8.2.5",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "clean-webpack-plugin": "^0.1.19",
-    "html-webpack-plugin": "^3.2.0",
     "parcel-bundler": "^1.9.2",
+    "prop-types": "^15.6.2",
     "standard": "^11.0.1",
-    "typescript": "^2.9.2",
-    "webpack": "^4.12.1",
-    "webpack-cli": "^3.0.8",
-    "webpack-dev-server": "^3.1.4"
+    "typescript": "^2.9.2"
   },
   "dependencies": {
     "@material-ui/core": "^1.2.3",

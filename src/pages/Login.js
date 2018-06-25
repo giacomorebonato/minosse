@@ -1,10 +1,12 @@
 import React from 'react'
+import CustomAppBar from '../components/CustomAppBar'
 import {
   AppBar,
   Button,
   Card,
   CardActions,
   CardContent,
+  Paper,
   TextField,
   Toolbar,
   Typography
@@ -13,16 +15,13 @@ import {
 class Login extends React.Component {
   render () {
     return (
-      <section>
-        <AppBar position='static' color='default'>
-          <Toolbar>
-            <Typography variant='title' color='inherit'>
-              Login
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Card>
-          <CardContent>
+      <React.Fragment>
+        <CustomAppBar>
+          Sign in
+        </CustomAppBar>
+
+        <div style={{ padding: 20 }}>
+          <Paper style={{ padding: '2em' }}>
             <form>
               <TextField
                 fullWidth
@@ -36,17 +35,9 @@ class Login extends React.Component {
                 margin='normal'
               />
             </form>
-          </CardContent>
-          <CardActions>
-            <Button size='small' color='primary'>
-              Share
-            </Button>
-            <Button size='small' color='primary'>
-              Learn More
-            </Button>
-          </CardActions>
-        </Card>
-      </section>
+          </Paper>
+        </div>
+      </React.Fragment>
     )
   }
 }

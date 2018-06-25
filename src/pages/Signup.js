@@ -1,20 +1,20 @@
 import React from 'react'
+import CustomAppBar from '../components/CustomAppBar'
 import {
-  AppBar,
   Button,
-  Card,
-  CardActions,
-  CardContent,
-  TextField,
-  Toolbar,
-  Typography
+  Grid,
+  Paper,
+  TextField
 } from '@material-ui/core'
 import {
   userPool
 } from '../lib/cognito'
+import {
+  CognitoUserAttribute
+} from 'amazon-cognito-identity-js'
 
-class Login extends React.Component {
-  constructor(props) {
+class Signup extends React.Component {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -31,66 +31,90 @@ class Login extends React.Component {
     e.preventDefault()
 
     let attributeList = [
-      {
+      new CognitoUserAttribute({
         Name: 'email',
         Value: this.state.email
-      }
+      })
     ]
-    userPool.signUp(this.state.email, this.state.password, attributeList, null, (err, result) => {
-      if (err) {
-        alert(err)
-        return
-      }
 
-      console.log('user name is ' + result.user.getUsername())
-    })
+    userPool.signUp(
+      this.state.email,
+      this.state.password,
+      attributeList,
+      null,
+      (err, result) => {
+        if (err) {
+          console.log(err)
+          return
+        }
+
+        console.log('user name is ' + result.user.getUsername())
+      })
   }
   render () {
     const { email, password } = this.state
 
     return (
-      <section>
-        <AppBar position='static' color='default'>
-          <Toolbar>
-            <Typography variant='title' color='inherit'>
-              Login
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Card>
-          <CardContent>
-            <form
-              onChange={this.handleChange}
-              onSubmit={this.handleSubmit}
+      <React.Fragment>
+        <CustomAppBar>Signup</CustomAppBar>
+        <Grid
+          justify='center'
+          container
+          spacing={16}
+          style={{
+            marginTop: '2em'
+          }}
+        >
+          <Grid item sm={4} xs={6}>
+            <Paper
+              style={{
+                padding: '2em'
+              }}
             >
-              <TextField
-                fullWidth
-                label='Email'
-                margin='normal'
-                name='email'
-                value={email}
-              />
+              <form
+                onChange={this.handleChange}
+                onSubmit={this.handleSubmit}
+              >
+                <TextField
+                  fullWidth
+                  label='Email'
+                  margin='normal'
+                  name='email'
+                  value={email}
+                />
 
-              <TextField
-                fullWidth
-                label='Password'
-                margin='normal'
-                name='password'
-                type='password'
-                value={password}
-              />
-            </form>
-          </CardContent>
-          <CardActions>
-            <button type='submit'>Submit</button>
-            <Button size='small' color='primary' type='submit'>
-              Signup
-            </Button>
-          </CardActions>
-        </Card>
-      </section>
+                <TextField
+                  fullWidth
+                  label='Password'
+                  margin='normal'
+                  name='password'
+                  type='password'
+                  value={password}
+                />
+
+                <Grid
+                  container
+                  justify='flex-end'
+                  style={{
+                    marginTop: '1em'
+                  }}
+                >
+                  <Button
+                    color='primary'
+                    size='small'
+                    type='submit'
+                    variant='contained'
+                  >
+                    Signup
+                  </Button>
+                </Grid>
+              </form>
+            </Paper>
+          </Grid>
+        </Grid>
+      </React.Fragment>
     )
   }
 }
 
-export default Login
+export default Signup

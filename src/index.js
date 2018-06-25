@@ -6,7 +6,3 @@ render(
   <Routes />,
   document.getElementById('app')
 )
-
-if (module.hot) {
-  console.log('Accepting the updated printMe module!')
-}

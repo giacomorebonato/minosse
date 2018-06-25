@@ -8,13 +8,17 @@ import {
 let homeLinks = [
   { label: 'Home', value: '/' },
   { label: 'Login', value: '/login' },
-  { label: 'About', value: '/about' }
+  { label: 'About', value: '/about' },
+  { label: 'Signup', value: '/signup' }
 ]
 
 function AppNavBar () {
   return (
     <BottomNavigation
       showLabels
+      style={{
+        justifyContent: 'space-around'
+      }}
     >
       {
         homeLinks.map(
