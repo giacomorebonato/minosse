@@ -1,14 +1,11 @@
-import createBrowserHistory from 'history/createBrowserHistory'
 import React from 'react'
 import { NavBar } from './components'
 import { About, Home, Login, NotFound, Signup } from './pages'
-import { Route, Router } from 'react-router-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
 import { Switch } from 'react-router'
 
-let history = createBrowserHistory()
-
 let Routes = () => (
-  <Router history={history}>
+  <BrowserRouter>
     <div>
       <Switch>
         <Route exact path='/' component={Home} />
@@ -19,7 +16,7 @@ let Routes = () => (
       </Switch>
       <NavBar />
     </div>
-  </Router>
+  </BrowserRouter>
 )
 
 export default Routes
