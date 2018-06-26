@@ -1,24 +1,15 @@
+import { Auth } from 'aws-amplify'
 import React from 'react'
 import CustomAppBar from '../components/CustomAppBar'
-import {
-  Button,
-  Grid,
-  Paper,
-  TextField
-} from '@material-ui/core'
-import {
-  userPool
-} from '../lib/cognito'
-import {
-  CognitoUserAttribute
-} from 'amazon-cognito-identity-js'
+import AuthForm from '../components/AuthForm'
+
 
 class Signup extends React.Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      email: '',
+      username: '',
       password: ''
     }
   }
@@ -30,88 +21,27 @@ class Signup extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
 
-    let attributeList = [
-      new CognitoUserAttribute({
-        Name: 'email',
-        Value: this.state.email
-      })
-    ]
+    const { password, username } = this.state
 
-    userPool.signUp(
-      this.state.email,
-      this.state.password,
-      attributeList,
-      null,
-      (err, result) => {
-        if (err) {
-          console.log(err)
-          return
-        }
-
-        console.log('user name is ' + result.user.getUsername())
-      })
+    Auth.signUp(username, password)
+      .then(success => console.log('successful sign in!'))
+      .catch(err => console.log(err))
   }
   render () {
-    const { email, password } = this.state
+    const { username, password } = this.state
 
     return (
       <React.Fragment>
         <CustomAppBar>Signup</CustomAppBar>
-        <Grid
-          justify='center'
-          container
-          spacing={16}
-          style={{
-            marginTop: '2em'
-          }}
-        >
-          <Grid item sm={4} xs={6}>
-            <Paper
-              style={{
-                padding: '2em'
-              }}
-            >
-              <form
-                onChange={this.handleChange}
-                onSubmit={this.handleSubmit}
-              >
-                <TextField
-                  fullWidth
-                  label='Email'
-                  margin='normal'
-                  name='email'
-                  value={email}
-                />
-
-                <TextField
-                  fullWidth
-                  label='Password'
-                  margin='normal'
-                  name='password'
-                  type='password'
-                  value={password}
-                />
-
-                <Grid
-                  container
-                  justify='flex-end'
-                  style={{
-                    marginTop: '1em'
-                  }}
-                >
-                  <Button
-                    color='primary'
-                    size='small'
-                    type='submit'
-                    variant='contained'
-                  >
-                    Signup
-                  </Button>
-                </Grid>
-              </form>
-            </Paper>
-          </Grid>
-        </Grid>
+        <AuthForm
+          cta='Submit'
+          fields={[
+            { label: 'Username', value: username },
+            { label: 'Password', value: password }
+          ]}
+          onChange={this.handleChange}
+          onSubmit={this.handleSubmit}
+        />
       </React.Fragment>
     )
   }
